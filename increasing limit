@@ -1,0 +1,23 @@
+Hello ,
+
+Hope you are doing well, and staying safe!
+
+Thank you for contacting AWS Premium Support. My name is Harikrishna and I will be assisting you with this case today.
+
+From the case notes, I understand that you are facing the error in your CodeBuild projects in the 'ca-central-1' (Canada) region. 
+
+
+-------------------
+Error Code: AccountLimitExceededException
+Error calling startBuild: Cannot have more than 0 builds in queue for the account (Service: AWSCodeBuild; Status Code: 400
+------------------- 
+
+I’ve had a look at the accounts CloudTrail log and I see that many of the StartBuild API calls are failing with the AccountLimitExceededException.
+
+However the aforementioned above error message, CodeBuild has an on-demand fleet, which scales based on incoming customer volume. If capacity is not immediately available, CodeBuild tries to queue the builds for additional capacity to be available in the build fleet. The rate at which the builds are processed are determined by your build concurrency limit- which for your account is low due to some changes done at our end. So, the builds failed because it exceeded the queue’s TTL for each build that codebuild as a whole could maintain. 
+
+I have reached out to our Internal Team to increase the concurrency limit for the account in the "us-east-1" region, which should help process the builds faster and not run into this issue. I will update you as soon as I hear back from the team. Till then, I will keep this case with me and will let you know once the limit increase has been actioned.
+
+I highly appreciate your patience and understanding in this regard. Feel free to reach out in case of any related query and we will be happy to assist. 
+
+Wish you a great day ahead, take care!
